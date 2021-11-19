@@ -12,6 +12,7 @@ const App = () => {
 
       <Route path="/" exact component={MainPage}/>
       <Route path="/cart" component={CartPage}/>
+
     </div>
   )
 }
