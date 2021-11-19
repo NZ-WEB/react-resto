@@ -19,26 +19,7 @@ class MenuList extends Component {
   }
 
   render() {
-    const {menuItems, loading, error} = this.props;
-
-
-    if (loading) {
-      return <Spinner/>
-    }
-
-    if (error !== null) {
-      return <Error message={error.message} type={error.error} />
-    }
-
-    return (
-      <ul className="menu__list">
-        {
-          menuItems.map(menuItem => {
-            return <MenuListItem key={menuItem.id} menuItem={menuItem}/>
-          })
-        }
-      </ul>
-    )
+    return <MenuListView {...this.props} />
   }
 };
 
@@ -58,3 +39,23 @@ const mapDispatchToProps = {
 
 
 export default WithRestoService()(connect(mapStateToProps, mapDispatchToProps)(MenuList));
+
+const MenuListView = ({menuItems, loading, error}) => {
+  if (loading) {
+    return <Spinner/>
+  }
+
+  if (error !== null) {
+    return <Error message={error.message} type={error.error} />
+  }
+
+  return (
+    <ul className="menu__list">
+      {
+        menuItems.map(menuItem => {
+          return <MenuListItem key={menuItem.id} menuItem={menuItem}/>
+        })
+      }
+    </ul>
+  )
+}
